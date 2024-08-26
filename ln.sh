@@ -32,9 +32,9 @@ create_symlink(){
 }
 
 # tmux config
-create_symlink ".tmux.conf"
-create_symlink ".tmux.conf.local"
+create_symlink "tmux/.tmux.conf"
+create_symlink "tmux/.tmux.conf.local"
 
 # zsh
-create_symlink ".zshrc"
+create_symlink "zsh/.zshrc"
 echo "[INFO] please execute following command if plugin not found: 'git clone https://github.com/zsh-users/zsh-autosuggestions \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions'"
