@@ -23,6 +23,7 @@ $ cd $HOME && git clone https://github.com/ZuoAnZoom/.myconfig.git
 $ cd $HOME/.myconfig
 $ stow zsh
 $ stow tmux
+$ stow nvim
 $ stow ...
 ```
 
