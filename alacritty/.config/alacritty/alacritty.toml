@@ -1,0 +1,98 @@
+background_opacity = 0.9
+"window.dynamic_title" = "ture"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "#2e3436"
+blue = "#729fcf"
+cyan = "#34e2e2"
+green = "#8ae234"
+magenta = "#ad7fa8"
+red = "#ef2929"
+white = "#eeeeec"
+yellow = "#fce94f"
+
+[colors.normal]
+black = "#2e3436"
+blue = "#3465a4"
+cyan = "#06989a"
+green = "#73d216"
+magenta = "#75507b"
+red = "#cc0000"
+white = "#d3d7cf"
+yellow = "#edd400"
+
+[colors.primary]
+background = "#1d2120"
+foreground = "#ebdbb2"
+
+[colors.selection]
+background = "0xdc3232"
+text = "0xffffff"
+white = "0xffffff"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[font]
+size = 11.5
+use_thin_strokes = false
+
+[font.bold]
+family = "FiraCode Nerd Font Mono"
+style = "Bold"
+
+[font.debug]
+persistent_logging = false
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "FiraCode Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "FiraCode Nerd Font Mono"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Control"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[shell]
+args = ["--login"]
+program = "/bin/zsh"
+
+[window]
+decorations = "full"
+
+[window.dimensions]
+columns = 80
+lines = 25
+
+[window.padding]
+x = 6
+y = 6
+
+[window.position]
+x = 0
+y = 0
