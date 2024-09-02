@@ -42,3 +42,9 @@ Use [oh my tmux](https://github.com/gpakosz/.tmux) with some customize options.
 
 ### zsh config
 Use [oh my zsh](https://ohmyz.sh).
+
+
+### Git config
+Use [git-delta](https://github.com/dandavison/delta) with some customize options.
+
+FYI: [git-lfs](https://git-lfs.com/) required.
