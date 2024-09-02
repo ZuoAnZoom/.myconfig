@@ -120,3 +120,5 @@ alias vim='mvim -v'
 
 alias nv='nvim'
 alias ra='ranger'
+
+source <(fzf --zsh)

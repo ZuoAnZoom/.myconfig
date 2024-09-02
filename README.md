@@ -39,6 +39,8 @@ $ cd $HOME && git clone https://github.com/ZuoAnZoom/.myconfig.git && cd .myconf
 ### Tmux config
 Use [oh my tmux](https://github.com/gpakosz/.tmux) with some customize options.
 
+- fzf include.
+
 
 ### zsh config
 Use [oh my zsh](https://ohmyz.sh).
