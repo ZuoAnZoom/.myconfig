@@ -1,9 +1,3 @@
-if [[ "$OSTYPE" == "darwin"* ]]; then
-
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-
-fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -135,7 +129,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 echo "Running .zshrc on macOS"
 
 
-# homebrew
+# homebrew shell completion
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -143,9 +137,6 @@ then
   autoload -Uz compinit
   compinit
 fi
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
 # fzf installed by brew, verion larger than 0.48.0
 source <(fzf --zsh)
