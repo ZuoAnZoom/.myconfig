@@ -1,13 +1,17 @@
+if [[ "$OSTYPE" == "darwin"* ]]; then
+
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+fi
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="af-magic"
@@ -72,7 +76,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gnu-utils colorize common-aliases cp git zsh-autosuggestions)
+plugins=(git cp colorize common-aliases gnu-utils zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -87,23 +91,51 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+alias nv='nvim'
+alias ra='ranger'
+
+# bat
+if which bat &> /dev/null; then
+  export BAT_THEME="TwoDark"
+  _BAT=$(which bat)
+  alias cat="${_BAT} -Pp"
+  alias less="${_BAT}"
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
+
+# set proxy
+alias goproxy="export http_proxy=10.100.61.105:1082 && export https_proxy=10.100.61.105:1082"
+alias unproxy="unset http_proxy && unset https_proxy"
+
+
+############ setup by OSTYPE start #############
+######## macOS ########
+if [[ "$OSTYPE" == "darwin"* ]]; then
+echo "Running .zshrc on macOS"
+
+
+# homebrew
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -112,14 +144,48 @@ then
   compinit
 fi
 
-# macvim
-alias vim='mvim -v'
-
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
-alias nv='nvim'
-alias ra='ranger'
+# fzf installed by brew, verion larger than 0.48.0
+source <(fzf --zsh)
 
-# fzf
+
+######## Linux ########
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+echo "Running .zshrc on Linux"
+
+unalias rm &> /dev/null
+unalias cp &> /dev/null
+unalias fd &> /dev/null
+unalias "..." &> /dev/null
+
+export GOPATH=$HOME/.local
+export PATH=/opt/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:/opt/darwin/bin:$PATH
+
+function source_file() {
+  args=("$@")
+  while [ $#args -gt 0 ]; do
+    file="${args[1]}"
+    args=(${args[@]:1})
+    if [[ -e "${file}" ]]; then
+      source "$file"
+    fi
+  done
+}
+source_file /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source_file "${HOME}/.mytoken.sh"
+
+export GLOG_alsologtostderr=1
+
+# neovim
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
+# fzf install by git
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+fi
+############ setup by OSTYPE end #############
+
+# fzf with preview --preview 'bat --color=always {}'
 export FZF_DEFAULT_OPTS="--height 60% --layout reverse --border top"
