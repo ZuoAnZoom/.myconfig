@@ -121,4 +121,5 @@ alias vim='mvim -v'
 alias nv='nvim'
 alias ra='ranger'
 
-source <(fzf --zsh)
+# fzf
+export FZF_DEFAULT_OPTS="--height 60% --layout reverse --border top"
