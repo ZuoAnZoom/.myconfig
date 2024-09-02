@@ -178,5 +178,17 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 fi
 ############ setup by OSTYPE end #############
 
-# fzf with preview --preview 'bat --color=always {}'
+# fzf with preview --preview 'bat -n --color=always {}'
 export FZF_DEFAULT_OPTS="--height 60% --layout reverse --border top"
+
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}
