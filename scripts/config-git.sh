@@ -6,13 +6,13 @@ PACKAGE_MANAGER=$1
 APP_NAME="git"
 
 function install_git_delta() {
-    trap 'return 1' ERR
-
     check_app_installed "delta"
     if [ $? -eq 0 ]; then
         echo_info "Skipping installation steps for git-delta."
         return 0
     fi
+
+    trap 'return 1' ERR
 
     arch=$(uname -m)
     echo_info "Installing git_delta ..."

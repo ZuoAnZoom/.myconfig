@@ -109,15 +109,6 @@ export LC_ALL=en_US.UTF-8
 alias nv='nvim'
 alias ra='ranger'
 
-# bat
-if which bat &> /dev/null; then
-  export BAT_THEME="TwoDark"
-  _BAT=$(which bat)
-  alias cat="${_BAT} -Pp"
-  alias less="${_BAT}"
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-fi
-
 # set proxy
 alias goproxy="export http_proxy=10.100.61.105:1082 && export https_proxy=10.100.61.105:1082"
 alias unproxy="unset http_proxy && unset https_proxy"
@@ -128,6 +119,14 @@ alias unproxy="unset http_proxy && unset https_proxy"
 if [[ "$OSTYPE" == "darwin"* ]]; then
 echo "Running .zshrc on macOS"
 
+# bat
+if which bat &> /dev/null; then
+  export BAT_THEME="TwoDark"
+  _BAT=$(which bat)
+  alias cat="${_BAT} -Pp"
+  alias less="${_BAT}"
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
 
 # homebrew shell completion
 if type brew &>/dev/null
@@ -145,6 +144,15 @@ source <(fzf --zsh)
 ######## Linux ########
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 echo "Running .zshrc on Linux"
+
+# bat
+if which batcat &> /dev/null; then
+  export BAT_THEME="TwoDark"
+  _BAT=$(which batcat)
+  alias cat="${_BAT} -Pp"
+  alias less="${_BAT}"
+  export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+fi
 
 unalias rm &> /dev/null
 unalias cp &> /dev/null
