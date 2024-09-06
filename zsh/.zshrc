@@ -149,9 +149,9 @@ echo "Running .zshrc on Linux"
 if which batcat &> /dev/null; then
   export BAT_THEME="TwoDark"
   _BAT=$(which batcat)
-  alias cat="${_BAT} -Pp"
+  alias cat="${_BAT} -pp"
   alias less="${_BAT}"
-  export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+  export MANPAGER="sh -c 'col -bx | batcat -l man -pp'"
 fi
 
 unalias rm &> /dev/null
