@@ -110,12 +110,12 @@ alias nv='nvim'
 alias ra='ranger'
 
 # set proxy
-alias goproxy="export http_proxy=10.100.61.105:1082 && export https_proxy=10.100.61.105:1082"
+alias goproxy="export http_proxy=10.100.61.174:1082 && export https_proxy=10.100.61.174:1082"
 alias unproxy="unset http_proxy && unset https_proxy"
 
 
 ############ setup by OSTYPE start #############
-######## macOS ########
+######### macOS start #########
 if [[ "$OSTYPE" == "darwin"* ]]; then
 echo "Running .zshrc on macOS"
 
@@ -155,9 +155,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+######## macoS end #########
 
-
-######## Linux ########
+######## Linux start #########
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 echo "Running .zshrc on Linux"
 
@@ -200,8 +200,28 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/csy/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/csy/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/csy/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/csy/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export M2_HOME=/opt/maven
+export PATH=$M2_HOME/bin:$PATH
+######## Linux end ########
 ############ setup by OSTYPE end #############
 
+############ commom setups #############
 # fzf with preview --preview 'bat -n --color=always {}'
 export FZF_DEFAULT_OPTS="--height 60% --layout reverse --border top"
 
