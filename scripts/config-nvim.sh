@@ -10,13 +10,7 @@ elif [[ "$PACKAGE_MANAGER" == "brew" ]]; then
 fi
 
 function set_config() {
-    if [ -d "$HOME/.config/nvim" ]; then
-        echo_warn "remove existing $HOME/.config/nvim"
-        rm -rf $HOME/.config/nvim
-    fi
-
-    cd "$(dirname "$0")/../" && stow $STOW_OPTIONS nvim
-    echo_info "stow nvim config successfully."
+    stow_package "nvim" "$HOME/.config/nvim"
 }
 
 # check installed
@@ -29,7 +23,7 @@ fi
 
 function install_nvim() {
     trap 'return 1' ERR
-    
+
     echo_info "Downloading $APP_NAME..."
     wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 

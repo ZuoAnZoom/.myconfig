@@ -33,13 +33,7 @@ function install_git_delta() {
 }
 
 function set_config() {
-    if [ -f "$HOME/.gitconfig" ]; then
-        echo_warn "remove existing $HOME/.gitconfig"
-        rm -rf $HOME/.gitconfig
-    fi
-
-    cd "$(dirname "$0")/../" && stow $STOW_OPTIONS git 
-    echo_info "stow git config successfully."
+    stow_package "git" "$HOME/.gitconfig"
 }
 
 

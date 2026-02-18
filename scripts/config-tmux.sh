@@ -6,18 +6,7 @@ PACKAGE_MANAGER=$1
 APP_NAME="tmux"
 
 function set_config() {
-    # set config
-    if [ -f "$HOME/.tmux.conf" ]; then
-        echo_warn "remove existing $HOME/.tmux.conf"
-        rm -rf $HOME/.tmux.conf
-    fi
-    if [ -f "$HOME/.tmux.conf.local" ]; then
-        echo_warn "remove existing $HOME/.tmux.conf.local"
-        rm -rf $HOME/.tmux.conf.local
-    fi
-
-    cd "$(dirname "$0")/../" && stow $STOW_OPTIONS tmux
-    echo_info "stow tmux config successfully."
+    stow_package "tmux" "$HOME/.tmux.conf" "$HOME/.tmux.conf.local"
 }
 
 # check installed

@@ -27,3 +27,29 @@ function check_app_installed() {
         return 0
     fi
 }
+
+function stow_package() {
+    local package_name="$1"
+    shift
+    local target_paths=("$@")
+
+    for path in "${target_paths[@]}"; do
+        if [ -e "$path" ] || [ -L "$path" ]; then
+            echo_warn "remove existing $path"
+            rm -rf "$path"
+        fi
+    done
+
+    (
+        cd "$(dirname "$0")/../" || return 1
+        stow $STOW_OPTIONS "$package_name"
+    )
+
+    if [ $? -ne 0 ]; then
+        echo_error "stow $package_name config failed."
+        return 1
+    fi
+
+    echo_info "stow $package_name config successfully."
+    return 0
+}
