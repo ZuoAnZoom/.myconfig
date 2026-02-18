@@ -6,13 +6,7 @@ PACKAGE_MANAGER=$1
 APP_NAME="zsh"
 
 function set_config() {
-    if [ -f "$HOME/.zshrc" ]; then
-        echo_warn "remove existing $HOME/.zshrc"
-        rm -rf $HOME/.zshrc
-    fi
-    
-    cd "$(dirname "$0")/../" && stow $STOW_OPTIONS zsh
-    echo_info "stow zsh config successfully."
+    stow_package "zsh" "$HOME/.zshrc"
 }
 
 function install_oh_my_zsh() {
@@ -34,7 +28,7 @@ function install_zsh_autosuggestions() {
         echo_info "zsh-autosuggestions already installed."
         return 0
     fi
-    
+
     echo_info "Installing zsh-autosuggestions..."
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 }
