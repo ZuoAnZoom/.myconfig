@@ -17,7 +17,7 @@ $ git clone https://github.com/ZuoAnZoom/.myconfig.git $HOME/.myconfig
 Using `config.sh` to set up both apps and configs.
 
 ```shell
-$ bash -c '$HOME/.myconfig/config.sh'  # setup stow, wget, git, zsh, tmux, fzf by default.
+$ bash -c '$HOME/.myconfig/config.sh'  # setup stow, wget, git, zsh, tmux, fzf, zoxide by default.
 $ bash -c '$HOME/.myconfig/config.sh nvim <other-app> ...'  # add other apps
 ```
 

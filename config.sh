@@ -54,7 +54,7 @@ fi
 
 
 user_apps=("$@")
-required_apps=("stow" "wget" "git" "zsh" "tmux" "fzf")
+required_apps=("stow" "wget" "git" "zsh" "tmux" "fzf" "zoxide")
 all_apps=("${required_apps[@]}" "${user_apps[@]}")
 failed_apps=()
 
