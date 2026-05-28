@@ -1,0 +1,146 @@
+# espanso match file
+
+# For a complete introduction, visit the official docs at: https://espanso.org/docs/
+
+# You can use this file to define the base matches (aka snippets)
+# that will be available in every application when using espanso.
+
+# Matches are substitution rules: when you type the "trigger" string
+# it gets replaced by the "replace" string.
+
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+
+matches:
+  # Print the current date
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+
+  # Print the current date and time
+  - trigger: ":now"
+    replace: "{{now}}"
+    vars:
+      - name: now
+        type: date
+        params:
+          format: "%Y-%m-%d %H:%M:%S"
+  
+  # Print markdown todo
+  - trigger: ":todo"
+    replace: "- [ ] "
+
+  # User Story template
+  - trigger: ":us"
+    replace: |
+      作为一个$|$，
+      我希望，
+      从而。
+
+  # AI implementation prompt template
+  - trigger: ":aipt"
+    replace: |
+      你需要$|$。
+
+      背景：
+
+
+      User Story:
+      作为一个 ，
+      我希望 ，
+      从而 。
+
+      Acceptance Criteria:
+
+      * 
+      * 
+      * 
+
+      Technical Design:
+
+      * 
+      * 
+      * 
+
+      请：
+
+      1. 
+      2. 
+      3. 
+
+  # Email addresses
+  - trigger: ":gmail1"
+    replace: "476234335csy@gmail.com"
+
+  - trigger: ":gmail2"
+    replace: "csy476234335@gmail.com"
+
+  - trigger: ":msn"
+    replace: "csy476234335@msn.cn"
+
+  - trigger: ":163"
+    replace: "shanyao_work@163.com"
+
+  - trigger: ":qq"
+    replace: "476234335@qq.com"
+
+  # Git commands
+  - trigger: ":ga"
+    replace: "git add ."
+
+  - trigger: ":gc"
+    replace: "git commit -s -m \"$|$\""
+
+  - trigger: ":gs"
+    replace: "git status"
+
+  - trigger: ":gd"
+    replace: "git diff HEAD"
+
+  - trigger: ":gco"
+    replace: "git checkout "
+
+  - trigger: ":gp"
+    replace: "git push"
+
+  # Docker commands
+  - trigger: ":dps"
+    replace: "docker ps"
+
+  - trigger: ":dpa"
+    replace: "docker ps -a"
+
+  - trigger: ":di"
+    replace: "docker images"
+
+  - trigger: ":dpl"
+    replace: "docker pull "
+
+  - trigger: ":drun"
+    replace: "docker run --rm -it "
+
+  - trigger: ":dexec"
+    replace: "docker exec -it $|$ /bin/zsh"
+
+  - trigger: ":dst"
+    replace: "docker stop "
+
+  - trigger: ":drm"
+    replace: "docker rm "
+
+  - trigger: ":drmi"
+    replace: "docker rmi "
+
+  # Print the local IPv4 address for the default network interface
+  - trigger: ":ip"
+    replace: "{{local_ip}}"
+    vars:
+      - name: local_ip
+        type: shell
+        params:
+          cmd: "ifconfig | awk '/^[a-z0-9]+: flags=/{iface=$1; sub(\":\", \"\", iface)} iface !~ /^(lo|utun|awdl|llw|bridge|gif|stf)/ && /inet / {print $2; exit}'"
+
+  # And much more! For more information, visit the docs: https://espanso.org/docs/
