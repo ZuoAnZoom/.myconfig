@@ -6,6 +6,7 @@ source "$(dirname "$0")/utils.sh"
 
 PACKAGE_MANAGER=$1
 APP_NAME="zoxide"
+export PATH="$HOME/.local/bin:$PATH"
 INSTALL_SCRIPT_URL="https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh"
 
 # check installed
