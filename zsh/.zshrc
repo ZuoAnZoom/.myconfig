@@ -209,6 +209,11 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 # fzf install by git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# zoxide
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
 fi
 
 # >>> conda initialize >>>
