@@ -1,24 +1,42 @@
--- load defaults i.e lua_lsp
-require("nvchad.configs.lspconfig").defaults()
-
-local lspconfig = require "lspconfig"
-
--- EXAMPLE
-local servers = { "html", "cssls", "clangd", "pylsp"}
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
-end
+-- NvChad's current defaults use Neovim's native vim.lsp.config API.
+nvlsp.defaults()
 
--- configuring single server, example: typescript
--- lspconfig.tsserver.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
+local servers = { "lua_ls", "html", "cssls", "pylsp", "clangd", "buf_ls" }
+
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = {
+          vim.fn.expand "$VIMRUNTIME/lua",
+          vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
+          vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
+          vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
+          "${3rd}/luv/library",
+        },
+        maxPreload = 100000,
+        preloadFileSize = 10000,
+      },
+    },
+  },
+})
+
+-- Buf handles Protocol Buffer files; do not let clangd attach to them.
+vim.lsp.config("clangd", {
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+})
+
+-- Current Buf CLI exposes its language server as `buf lsp serve`. The
+-- modules/buf.yaml file identifies this project's Proto import root.
+vim.lsp.config("buf_ls", {
+  cmd = { "buf", "lsp", "serve", "--log-format=text" },
+  filetypes = { "proto", "buf-config" },
+  root_markers = { "buf.yaml", "buf.work.yaml", ".git" },
+})
+
+vim.lsp.enable(servers)
